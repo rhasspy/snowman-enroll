@@ -16,7 +16,7 @@ namespace snowboy {
 	struct VadState {
 		VadStateOptions m_options;
 		bool m_field_x10;
-		size_t m_field_x14;
+		std::size_t m_field_x14;
 
 		VadState(VadStateOptions options);
 		virtual ~VadState();

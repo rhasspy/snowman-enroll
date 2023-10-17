@@ -3,3 +3,4 @@
 resources/models/*.pmdl
 /docs
 /local
+/dist

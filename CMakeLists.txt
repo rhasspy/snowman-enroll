@@ -15,19 +15,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(SNOWMAN_ENABLE_LTO "Enable LTO on the compiler if supported" ON)
 option(SNOWMAN_CXX11_COMPAT "Build library with C++11 strings disabled to be binary compatible with the original release." OFF)
 option(SNOWMAN_BUILD_APPS "Build helper applications like enroll or cut" ON)
-option(SNOWMAN_BUILD_APPS_STATIC "Build apps statically" OFF)
+option(SNOWMAN_BUILD_APPS_STATIC "Build apps statically" ON)
 option(SNOWMAN_BUILD_TESTS "Build unit tests (requires gtest and openssl)" ON)
 option(SNOWMAN_BUILD_WASM "Build wasm version of the library" OFF)
 option(SNOWMAN_BUILD_SHARED "Build library as a shared library instead of a static library" OFF)
-# According to steam ~99.17% of users have at least ssse3
-# and 100% have SSE, SSE2 and SSE3, so this is on by default
-option(SNOWMAN_BUILD_WITH_SSE3 "Enable sse3 optimizations" ON)
-# ~98.3%, so this is on by default as well
-option(SNOWMAN_BUILD_WITH_SSE4 "Enable sse4 optimizations" ON)
-# ~94.7%
-option(SNOWMAN_BUILD_WITH_AVX "Enable avx optimizations" OFF)
-# ~82%
-option(SNOWMAN_BUILD_WITH_AVX2 "Enable avx2 optimizations" OFF)
+
+if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
+  # According to steam ~99.17% of users have at least ssse3
+  # and 100% have SSE, SSE2 and SSE3, so this is on by default
+  option(SNOWMAN_BUILD_WITH_SSE3 "Enable sse3 optimizations" ON)
+  # ~98.3%, so this is on by default as well
+  option(SNOWMAN_BUILD_WITH_SSE4 "Enable sse4 optimizations" ON)
+  # ~94.7%
+  option(SNOWMAN_BUILD_WITH_AVX "Enable avx optimizations" OFF)
+  # ~82%
+  option(SNOWMAN_BUILD_WITH_AVX2 "Enable avx2 optimizations" OFF)
+endif()
+
 option(SNOWMAN_BUILD_NATIVE "Build library for the current cpu. This makes sure it uses every instruction set available, but the resulting binary probably won't run on older hardware." OFF)
 
 # Enable Link-Time Optimization

@@ -1,0 +1,10 @@
+*
+!Makefile
+!CMakeLists.txt
+!apps/*.cpp
+!apps/*.h
+!apps/CMakeLists.txt
+!lib/*.cpp
+!lib/*.h
+!lib/CMakeLists.txt
+!resources/
