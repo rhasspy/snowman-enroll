@@ -15,10 +15,14 @@ WORKDIR /snowman
 COPY ./ ./
 
 RUN make
+RUN mkdir -p dist && \
+    cp -R resources/ build/apps/detect build/apps/enroll dist/ && \
+    cd dist && \
+    tar -czf "snowman_enroll-${TARGETARCH}${TARGETVARIANT}.tar.gz" \
+        resources/ detect enroll
 
 # -----------------------------------------------------------------------------
 
 FROM scratch
 
-COPY --from=build /snowman/resources/ ./resources/
-COPY --from=build /snowman/build/apps/detect /snowman/build/apps/enroll ./
+COPY --from=build /snowman/dist/*.tar.gz ./
